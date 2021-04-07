@@ -1,0 +1,22 @@
+.Reg {
+  display: flex;
+  flex-direction: column;
+  padding: 36px 48px;
+
+  h2 {
+    margin: 0 0 20px 0;
+    color: #404064;
+    font-weight: 700;
+    font-size: 21px;
+  }
+
+  span {
+    margin-top: 18px;
+    color: #404064;
+
+    a {
+      color: #3167ba;
+      margin-top: 18px;
+    }
+  }
+}

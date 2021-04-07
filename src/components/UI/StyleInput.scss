@@ -1,0 +1,35 @@
+$main-color: #415FD5;
+
+.Input {
+  border: 1px solid #D6DCE9;
+  border-radius: 4px;
+  outline: none;
+  padding: 7px 15px 8px 10px;
+  margin-bottom: 12px;
+  transition: all .4s ease;
+
+  input {
+    width: 90%;
+    height: 100%;
+    border: none;
+    outline: none;
+    color: #6879BB;
+
+    &::placeholder {
+      color: #CCCCCC;
+    }
+  }
+  
+  &:hover {
+    color: $main-color;
+    border: 1px solid $main-color;
+    transition: all .4s ease;
+  }
+
+  // &:disabled {
+  //   color: #333333;
+  //   background: #F5F5F5;
+  //   border: 1px solid #D6DCE9;
+  //   cursor: not-allowed;
+  // }
+}
