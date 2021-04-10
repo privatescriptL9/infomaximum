@@ -185,11 +185,13 @@
 
 
 @media (max-width: 1280px) {
-  .container {
-    width: 96% !important;
-  }
-
-  .section {
-    width: 21% !important;
+  .card {
+    .container {
+      width: 96% !important;
+    }
+  
+    .section {
+      width: 21% !important;
+    }
   }
 }

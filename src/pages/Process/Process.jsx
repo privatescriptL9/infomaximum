@@ -1,20 +1,23 @@
+import { useEffect, useState } from 'react'
+import { useQuery } from '@apollo/client'
 import ProcessCard from '../../components/ProcessCard/ProcessCard'
 import './Process.scss'
+import { PROCESS_LIST } from '../../graphQL/query/process'
 
-function renderCards(cards) {
+function renderCards(processList) {
   return (
-    cards.map((card, index) => {
+    processList.map(card => {
       return (
         <ProcessCard
-          key={index}
-          title={card.title}
-          performed={card.performed}
+          key={card.id}
+          name={card.name}
+          numberOfExecutions={card.numberOfExecutions}
           averageLeadTime={card.averageLeadTime}
           averageActiveTime={card.averageActiveTime}
-          employees={card.employees}
-          scen={card.scen}
-          timeStart={card.timeStart}
-          timeEnd={card.timeEnd}
+          employeesInvolvedProcess={card.employeesInvolvedProcess}
+          numberOfScenarios={card.numberOfScenarios}
+          start={card.start}
+          end={card.end}
           loading={card.loading}
         />
       )
@@ -23,45 +26,27 @@ function renderCards(cards) {
 }
 
 const Process = () => {
-  const cards = [
-    {
-      title: 'Рассмотрение кредитной заявки',
-      performed: '340 487',
-      averageLeadTime: '10ч 36 мин',
-      averageActiveTime: '1ч 7 мин (10,5%)',
-      employees: '120 сотрудников',
-      scen: '129 сценариев',
-      timeStart: '11 ноября 2017',
-      timeEnd: '6 января 2018',
-      loading: '10 января 2018',
-    },
-    {
-      title: 'Подготовка и прохождение платежей',
-      performed: '981',
-      averageLeadTime: '24ч',
-      averageActiveTime: '1ч (4,2%)',
-      employees: '3 сотрудника',
-      scen: '7 сценариев',
-      timeStart: '11 ноября 2017',
-      timeEnd: '6 января 2018',
-      loading: '10 января 2018',
-    },
-    {
-      title: 'Оформление страховых премий',
-      performed: '340 487',
-      averageLeadTime: '76ч 47 мин',
-      averageActiveTime: '1ч 7 мин (10,5%)',
-      employees: '53 сотрудника',
-      scen: '129 сценариев',
-      timeStart: '11 ноября 2017',
-      timeEnd: '6 января 2018',
-      loading: '10 января 2018',
-    },
-  ]
+  const { data, loading, error } = useQuery(PROCESS_LIST)
+  const [processList, setProcesses] = useState([])
 
+  useEffect(() => {
+    if (data) {
+      setProcesses(data.processList)
+    }
+    //eslint-disable-next-line
+  }, [data])
   return (
     <div className="Process">
-      {renderCards(cards)}
+      { 
+        loading 
+        ? 'Loading...' 
+        : renderCards(processList) 
+      }
+      { 
+        error 
+        ? <span style={{color: 'red'}}>Произошла ошибка: {error.message}</span> 
+        : null 
+      }
     </div>
   )
 }
