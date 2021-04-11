@@ -1,7 +1,7 @@
 import './Loader.scss'
 
 export const Loader = () => (
-  <div class="Loader">
+  <div className="Loader">
     <div />
     <div />
     <div />
