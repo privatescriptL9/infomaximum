@@ -10,8 +10,17 @@
     font-size: 21px;
   }
 
+  .wrapper {
+    height: 60px;
+
+    .error {
+      font-size: 12px;
+      line-height: 16px;
+      color: #ee4141;
+    }
+  }
+
   span {
-    margin-top: 18px;
     color: #404064;
 
     a {

@@ -1,10 +1,10 @@
-import './Button.scss'
+import classes from './Button.module.scss'
 
 const Button = ({onClick, disabled, style, children}) => {
   return (
     <button
       onClick={onClick}
-      className="Button"
+      className={classes.Button}
       disabled={disabled}
       style={style}
     >

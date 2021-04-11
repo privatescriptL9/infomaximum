@@ -3,6 +3,15 @@
   flex-direction: column;
   padding: 36px 48px;
 
+  .wrapper {
+    height: 60px;
+
+    .error {
+      color: #EE4141;
+      font-size: 12px;
+    }
+  }
+
   a {
     color: #3167BA;
     margin-top: 18px;
