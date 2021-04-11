@@ -1,25 +1,39 @@
 import { Link } from 'react-router-dom'
 import './Auth.scss'
-import TextInput from '../../components/UI/TextInput/TextInput'
-import PasswordInput from '../../components/UI/PasswordInput/PasswordInput'
 import Button from '../../components/UI/Button/Button'
 import ErrorMessage from '../../components/UI/ErrorMessage/ErrorMessage'
-import { Form, Field } from 'react-final-form'
-import {
-  composeValidators,
-  isEmail,
-  minLength,
-  required
-} from '../../utils/validators/validators'
+import { Form } from 'react-final-form'
+import { isEmail, minLength, required } from '../../utils/validators/validators'
 import { useMutation } from '@apollo/client'
 import { LOGIN } from '../../graphQL/mutations/user'
 import { useState } from 'react'
+import {
+  renderPasswordFields,
+  renderTextFields
+} from '../../utils/renderFields/renderFields'
 
 export const Auth = () => {
   const [statusError, setStatusError] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
 
   const [login] = useMutation(LOGIN)
+
+  const textInputs = [
+    {
+      name: 'email',
+      validators: [required, isEmail],
+      placeholder: 'Электронная почта',
+      type: 'email'
+    }
+  ]
+
+  const passwordInputs = [
+    {
+      name: 'password',
+      validators: [required, minLength],
+      placeholder: 'Пароль'
+    }
+  ]
 
   return (
     <>
@@ -32,7 +46,7 @@ export const Auth = () => {
             }
           })
             .then(({ data }) => {
-              localStorage.setItem('token', data.login.token)
+              sessionStorage.setItem('token', data.login.token)
               window.location.reload()
             })
             .catch(error => {
@@ -46,32 +60,8 @@ export const Auth = () => {
       >
         {({ handleSubmit, submitting, pristine }) => (
           <form className="Auth" onSubmit={handleSubmit}>
-            <Field name="email" validate={composeValidators(required, isEmail)}>
-              {({ input, meta }) => (
-                <div className="wrapper">
-                  <TextInput
-                    placeholder="Электронная почта"
-                    type="email"
-                    inputInfo={input}
-                    meta={meta}
-                  />
-                </div>
-              )}
-            </Field>
-            <Field
-              name="password"
-              validate={composeValidators(required, minLength)}
-            >
-              {({ input, meta }) => (
-                <div className="wrapper">
-                  <PasswordInput
-                    placeholder="Пароль"
-                    inputInfo={input}
-                    meta={meta}
-                  />
-                </div>
-              )}
-            </Field>
+            {renderTextFields(textInputs)}
+            {renderPasswordFields(passwordInputs)}
             <Button style={{ marginTop: 10 }}>Войти в систему</Button>
             <Link to="/reg">Зарегистрироваться</Link>
           </form>

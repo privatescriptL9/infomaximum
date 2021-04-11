@@ -1,14 +1,7 @@
 import classes from '../StyleInput.module.scss'
 import './TextInput.scss'
 
-const TextInput = ({
-  placeholder,
-  disabled,
-  label,
-  type,
-  inputInfo,
-  meta
-}) => {
+const TextInput = ({ placeholder, disabled, label, type, inputInfo, meta }) => {
   const htmlFor = `${label}-${Math.random()}`
   const inputType = type || 'text'
   const cls = [classes.Input, 'TextInput']

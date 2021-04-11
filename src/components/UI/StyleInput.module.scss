@@ -1,12 +1,11 @@
-$main-color: #415FD5;
+$main-color: #415fd5;
 
 .Input {
-  border: 1px solid #D6DCE9;
+  border: 1px solid #d6dce9;
   outline: none;
   width: 100%;
   border-radius: 4px;
-  //margin-bottom: 12px;
-  transition: all .4s ease;
+  transition: all 0.4s ease;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -18,28 +17,28 @@ $main-color: #415FD5;
     border: none;
     border-radius: 4px;
     outline: none;
-    color: #6879BB;
+    color: #6879bb;
 
     &::placeholder {
-      color: #CCCCCC;
+      color: #cccccc;
+    }
+
+    &:disabled {
+      color: #333333;
+      background: #f5f5f5;
+      border: 1px solid #d6dce9;
+      cursor: not-allowed;
+      border: none;
     }
   }
-  
+
   &:hover {
     color: $main-color;
     border: 1px solid $main-color;
-    transition: all .4s ease;
+    transition: all 0.4s ease;
   }
 
   &.error {
-    border: 1px solid #EE4141;
+    border: 1px solid #ee4141;
   }
-
-  // &:disabled {
-  //   color: #333333;
-  //   background: #F5F5F5;
-  //   border: 1px solid #D6DCE9;
-  //   cursor: not-allowed;
-  // }
 }
-

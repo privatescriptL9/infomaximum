@@ -5,7 +5,7 @@ const Profile = () => {
   return (
     <div className="Profile">
       <div className="Profile-card">
-        <AccountForm/>
+        <AccountForm />
       </div>
     </div>
   )

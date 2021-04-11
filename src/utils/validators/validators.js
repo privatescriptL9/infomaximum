@@ -21,11 +21,10 @@ export function minLength(value) {
 }
 
 export function composeValidators(...validators) {
-  return function(value) {
-    return validators
-          .reduce(
-            (error, validator) => error || validator(value), 
-            undefined
-          )
+  return function (value) {
+    return validators.reduce(
+      (error, validator) => error || validator(value),
+      undefined
+    )
   }
 }

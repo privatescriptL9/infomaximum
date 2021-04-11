@@ -111,7 +111,12 @@ const ProcessCard = props => {
                   </svg>
                 </div>
                 <div className={'col-2'}>
-                  <h4>{milisecondsToAverageActiveTime(props.averageActiveTime, props.averageLeadTime)}</h4>
+                  <h4>
+                    {milisecondsToAverageActiveTime(
+                      props.averageActiveTime,
+                      props.averageLeadTime
+                    )}
+                  </h4>
                   <span>среднее активное время</span>
                 </div>
               </div>
@@ -181,9 +186,7 @@ const ProcessCard = props => {
                 <span className={'black'}>
                   {milisecondsToDate(props.start)}
                 </span>
-                <span className={'black'}>
-                  {milisecondsToDate(props.end)}
-                </span>
+                <span className={'black'}>{milisecondsToDate(props.end)}</span>
                 <span className={'black'}>
                   {milisecondsToDate(props.loading)}
                 </span>

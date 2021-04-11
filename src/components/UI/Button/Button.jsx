@@ -1,6 +1,6 @@
 import classes from './Button.module.scss'
 
-const Button = ({onClick, disabled, style, children}) => {
+const Button = ({ onClick, disabled, style, children }) => {
   return (
     <button
       onClick={onClick}

@@ -10,13 +10,24 @@ import {
   createHttpLink
 } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
+import { createStore, compose, applyMiddleware } from 'redux'
+import { Provider } from 'react-redux'
+import rootReducer from './store/reducers/rootReducer'
+import thunk from 'redux-thunk'
+
+const composeEnhancers =
+  typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
+    : compose
+
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)))
 
 const httpLink = createHttpLink({
   uri: 'http://localhost:4000/api'
 })
 
 const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem('token') || null
+  const token = sessionStorage.getItem('token') || null
 
   return {
     headers: {
@@ -34,9 +45,11 @@ const client = new ApolloClient({
 ReactDOM.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
-      <Router>
-        <App />
-      </Router>
+      <Provider store={store}>
+        <Router>
+          <App />
+        </Router>
+      </Provider>
     </ApolloProvider>
   </React.StrictMode>,
   document.getElementById('root')

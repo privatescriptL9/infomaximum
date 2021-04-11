@@ -56,7 +56,6 @@ const Drawer = props => {
         <div className={classes.drawerMenu}>
           <div onClick={clickHandler}>
             <svg
-              
               width="16"
               height="16"
               viewBox="0 0 16 16"
@@ -70,7 +69,7 @@ const Drawer = props => {
                 fill="#FFFFFF"
               ></path>
             </svg>
-            <img src={proceset} alt="proceset"/>
+            <img src={proceset} alt="proceset" />
           </div>
         </div>
         <ul>{renderLinks(links)}</ul>

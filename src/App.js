@@ -7,7 +7,7 @@ import Auth from './pages/Auth/Auth'
 import Reg from './pages/Reg/Reg'
 
 function App() {
-  const token = localStorage.getItem('token')
+  const token = sessionStorage.getItem('token')
   let routing
 
   if (token) {

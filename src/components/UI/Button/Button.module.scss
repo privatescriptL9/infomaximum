@@ -1,5 +1,5 @@
-$main-color: #FFCE0C;
-$second-color: #FFD73B;
+$main-color: #ffce0c;
+$second-color: #ffd73b;
 
 .Button {
   background: $main-color;
@@ -10,28 +10,28 @@ $second-color: #FFD73B;
   cursor: pointer;
   font-weight: 700;
   color: #333333;
-  transition: all .4s ease;
+  transition: all 0.4s ease;
   box-shadow: 0px 4px 5px 0px rgba(34, 60, 80, 0.2);
 
   &:hover {
     background: $second-color;
     box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.12);
-    transition: all .4s ease;
+    transition: all 0.4s ease;
   }
 
   &:active {
-    background: #FFC40C;
+    background: #ffc40c;
     box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.12);
   }
 
   &:focus {
-    border: 1px solid #FFFBEA;
+    border: 1px solid #fffbea;
     box-shadow: 0px 1px 10px $second-color;
   }
 
   &:disabled {
-    opacity: .5;
+    box-shadow: none;
+    opacity: 0.5;
     cursor: not-allowed;
   }
-
-}               
+}

@@ -1,25 +1,56 @@
 import { Link } from 'react-router-dom'
 import './Reg.scss'
 import Button from '../../components/UI/Button/Button'
-import TextInput from '../../components/UI/TextInput/TextInput'
-import PasswordInput from '../../components/UI/PasswordInput/PasswordInput'
 import ErrorMessage from '../../components/UI/ErrorMessage/ErrorMessage'
-import { Form, Field } from 'react-final-form'
-import {
-  composeValidators,
-  isEmail,
-  minLength,
-  required
-} from '../../utils/validators/validators'
+import { Form } from 'react-final-form'
+import { isEmail, minLength, required } from '../../utils/validators/validators'
 import { useMutation } from '@apollo/client'
 import { SIGN_UP } from '../../graphQL/mutations/user'
 import { useState } from 'react'
+import {
+  renderPasswordFields,
+  renderTextFields
+} from '../../utils/renderFields/renderFields'
 
 export const Reg = () => {
   const [statusError, setStatusError] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
 
   const [signup] = useMutation(SIGN_UP)
+
+  const textInputs = [
+    {
+      name: 'name',
+      validators: [required],
+      placeholder: 'Имя',
+      type: 'text'
+    },
+    {
+      name: 'lastName',
+      validators: [required],
+      placeholder: 'Фамилия',
+      type: 'text'
+    },
+    {
+      name: 'email',
+      validators: [required, isEmail],
+      placeholder: 'Электронная почта',
+      type: 'email'
+    }
+  ]
+
+  const passwordInputs = [
+    {
+      name: 'password',
+      validators: [required, minLength],
+      placeholder: 'Пароль'
+    },
+    {
+      name: 'confirmPassword',
+      validators: [required],
+      placeholder: 'Повторите пароль'
+    }
+  ]
 
   return (
     <>
@@ -34,7 +65,7 @@ export const Reg = () => {
             }
           })
             .then(({ data }) => {
-              localStorage.setItem('token', data.signup)
+              sessionStorage.setItem('token', data.signup)
               window.location.reload()
             })
             .catch(error => {
@@ -56,70 +87,8 @@ export const Reg = () => {
         {({ handleSubmit, submitting, pristine }) => (
           <form className="Reg" onSubmit={handleSubmit}>
             <h2>Регистрация</h2>
-            <Field name="name" validate={composeValidators(required)}>
-              {({ input, meta }) => (
-                <div className="wrapper">
-                  <TextInput
-                    placeholder="Имя"
-                    type="text"
-                    inputInfo={input}
-                    meta={meta}
-                  />
-                </div>
-              )}
-            </Field>
-            <Field name="lastName" validate={composeValidators(required)}>
-              {({ input, meta }) => (
-                <div className="wrapper">
-                  <TextInput
-                    placeholder="Фамилия"
-                    type="text"
-                    inputInfo={input}
-                    meta={meta}
-                  />
-                </div>
-              )}
-            </Field>
-            <Field name="email" validate={composeValidators(required, isEmail)}>
-              {({ input, meta }) => (
-                <div className="wrapper">
-                  <TextInput
-                    placeholder="Электронная почта"
-                    type="email"
-                    inputInfo={input}
-                    meta={meta}
-                  />
-                </div>
-              )}
-            </Field>
-            <Field
-              name="password"
-              validate={composeValidators(required, minLength)}
-            >
-              {({ input, meta }) => (
-                <div className="wrapper">
-                  <PasswordInput
-                    placeholder="Пароль"
-                    inputInfo={input}
-                    meta={meta}
-                  />
-                </div>
-              )}
-            </Field>
-            <Field
-              name="confirmPassword"
-              validate={composeValidators(required)}
-            >
-              {({ input, meta }) => (
-                <div className="wrapper">
-                  <PasswordInput
-                    placeholder="Повторите пароль"
-                    inputInfo={input}
-                    meta={meta}
-                  />
-                </div>
-              )}
-            </Field>
+            {renderTextFields(textInputs)}
+            {renderPasswordFields(passwordInputs)}
             <Button style={{ margin: '10px 0 18px 0' }}>
               Применить и войти
             </Button>
