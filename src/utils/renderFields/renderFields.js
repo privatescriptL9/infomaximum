@@ -4,9 +4,10 @@ import { Field } from 'react-final-form'
 import { composeValidators } from '../../utils/validators/validators'
 
 export function renderTextFields(fields) {
-  return fields.map(field => {
+  return fields.map((field, index) => {
     return (
       <Field
+        key={field.name + index}
         name={field.name}
         validate={composeValidators(...field.validators)}
       >
@@ -27,8 +28,12 @@ export function renderTextFields(fields) {
 }
 
 export function renderPasswordFields(fields) {
-  return fields.map(field => (
-    <Field name={field.name} validate={composeValidators(...field.validators)}>
+  return fields.map((field, index) => (
+    <Field
+      key={field.name + index}
+      name={field.name}
+      validate={composeValidators(...field.validators)}
+    >
       {({ input, meta }) => (
         <div className="wrapper">
           <PasswordInput
