@@ -3,9 +3,7 @@ import { FETCH_CURRENT_USER, FETCH_FULL_NAME } from '../actions/actionsTypes'
 const initialState = {
   currentUser: null,
   firstName: null,
-  secondName: null,
-  error: null,
-  textButton: 'Сохранить'
+  secondName: null
 }
 
 export default function userReducer(state = initialState, action) {

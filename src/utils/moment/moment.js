@@ -24,7 +24,7 @@ export const milisecondsToAverageActiveTime = (
 
 export const milisecondsToDate = miliseconds => {
   return moment(miliseconds * 1000)
-    .format('DD MMMM YYYY')
+    .format('D MMMM YYYY')
     .replace('January', 'января')
     .replace('February', 'февраля')
     .replace('March', 'марта')

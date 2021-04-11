@@ -133,9 +133,7 @@ const mapStateToProps = state => {
   return {
     currentUser: state.user.currentUser,
     firstName: state.user.firstName,
-    secondName: state.user.secondName,
-    error: state.user.error,
-    textButton: state.user.textButton
+    secondName: state.user.secondName
   }
 }
 
